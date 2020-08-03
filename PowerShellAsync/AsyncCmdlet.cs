@@ -70,8 +70,7 @@ namespace TTRider.PowerShellAsync
 
         public new void WriteVerbose(string text)
         {
-            var workItem = new MarshalItemAction<string>(base.WriteVerbose, text);
-            AsyncCmdletSynchronizationContext.PostItem(workItem);
+            AsyncCmdletSynchronizationContext.PostItem(new MarshalItemAction<string>(base.WriteVerbose, text));
         }
 
         public new void WriteWarning(string text)
