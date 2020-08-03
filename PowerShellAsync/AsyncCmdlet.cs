@@ -202,6 +202,11 @@ namespace TTRider.PowerShellAsync
                         synchronizationContext.ProcessQueue();
 
                         waitable.GetAwaiter().GetResult();
+
+                        //error handling - exception is AggregateException therefore throwing inner exception
+                        var exception = task.Exception;
+                        if (exception != null && exception.InnerException != null)
+                            throw exception.InnerException;
                     }
                 }
                 finally
